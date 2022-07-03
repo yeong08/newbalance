@@ -1,0 +1,777 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
+
+* {margin:0; padding:0;}
+li {list-style: none;}
+a {display:block; text-decoration: none; color:#333;}
+img {width: 100%;}
+html, body { overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif;}
+div, header, section, footer {
+    width: 100%;
+     /* 헤더나 이런곳에 뭔가를 넣었을때 margin-top적용도 잘 되고 (a)
+    다음 페이지로 내용이 넘어가는거 막으려고 넣는 것 (b)*/
+    float: left; /*(a)*/
+    box-sizing: border-box;/*(b)*/
+    /* 이걸 지우고 싶으면 content-box함 됨 */
+}
+
+.wrap {width: 100%;}
+header {
+    /* 상단에 고정되라 */
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 100;
+
+    height:75px;
+    background-color: transparent;
+    padding: 4vw;
+
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    transition: all 0.5s;
+}
+header .logo {
+    width: 14vw;
+    height: 7vw;
+    background-image: url(../img/nblogo.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+
+}
+header .menu_btn {
+    width: 5vw;
+    height: 5vw;
+    background-image: url(../img/menu.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    /* margin: 1vw 0 ; */
+}
+header.active {
+    background-color: #fff;
+}
+header.active .logo {
+    background-image: url(../img/logo_black.png);
+}
+header.active .menu_btn {
+    background-image: url(../img/menu_black.png);
+}
+/* 누르면 옆에서 나오는 내비게이션 */
+header nav {
+    overflow:scroll;
+    /* 나왔다 들어갔다 하는애니까 겹쳐있어야함 */
+    position: absolute;
+    background-color: #f8f8f8;
+    width: 90vw;
+    /* 높이를 길게 잡아줘야 메뉴를 다 덮었다가 나왔다 들어갔다 함 */
+    height: 100vh;
+    /* 높이를 길게 잡아줘야 메뉴를 다 덮었다가 나왔다 들어갔다 함 */
+    right: -100vw;
+    top: 0;
+}
+header nav .top_nav {
+    background-color: #8da48d;
+    color: #fff;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 4vw;
+
+}
+header nav .top_nav .top_logo {
+    font-size: 3vw;
+    width: 18vw;
+    height: 8vw;
+    padding: 2vw;
+    white-space: nowrap;
+    /* 글자 테두리인데 안넣어줌 */
+    /* border : 1px solid #fff;
+    font-size: 2vw;
+    text-align:center; */
+}
+header nav .top_nav .close_btn {
+    padding: 2vw;
+    width: 9vw;
+}
+header nav > ul {
+    background-color: #f8f8f8;
+    padding: 5vw 4vw;
+    /* 형제끼리 우리가 겹쳐라 안했는데 겹쳐져있음 (겹쳐있으면 패딩이 안먹힘)
+    그럴때는 가로길이랑 , float:left를 해주면 겹치치 않게 됨 */
+    width: 100%;
+    float:left;
+}
+/* 주메뉴 */
+header nav > ul > li {
+    border: 1px solid #dfdfdf;
+    border-bottom: none;/* 선이 이중으로 보여서 이걸 넣고 */
+    width: 90%;
+}
+/* 선이 이중으로 보여서 이것도 넣어줌 */
+header nav > ul > li:last-child{
+    border: 1px solid #dfdfdf;
+}
+header nav > ul > li > a {
+    font-weight: bold;
+    font-size: 4vw;
+    /* 서브메뉴랑 떨어져 */
+    padding: 5vw;
+    /* 주메뉴랑 span(화살표)랑 나란히 해주기 위해서 넣음 */
+    display: flex;
+    flex-flow:nowrap;
+    justify-content: space-between;
+}
+/* 주메뉴 옆에있는 다운 화살표 */
+header nav > ul > li > a span {
+    display:block;
+    /* 얘를 써야 가로가 나옴 */
+    width: 5vw;
+    height: 5vw;
+    background-image: url(../img/down_arrow.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/* 주메뉴 옆 화살표 누르면 업모양 화살표로 바뀌게 해줘 */
+header nav > ul > li > a.active span {
+    background-image: url(../img/up_arrow.png);
+}
+
+header nav .sub {
+     /* 전체 서브메뉴와 주메뉴간의 간격 */
+    padding: 1vw 7vw 6vw;
+    display: none;
+}
+header nav .sub li a {
+    /* 서브메뉴간의 간격 */
+    padding: 5vw 6vw;
+    font-size: 3.4vw;
+    color: #666;
+}
+
+section.s1 .swiper {
+    height: 110vh;
+}
+section.s1 .swiper .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    padding-top: 50vh;
+    padding-left:9vw;
+}
+section.s1 .swiper .main1 {
+    background-image: url(../img/main1.png);
+}
+section.s1 .swiper .main2 {
+    background-image: url(../img/main2.png);
+}
+section.s1 .swiper .main3 {
+    background-image: url(../img/main3.png);
+}
+section.s1 .swiper .swiper-slide h1 {
+    white-space: nowrap;
+    /* width: 100%;
+    height: 18vw; */
+    font-size: 7vw;
+    line-height: 9vw;
+    /* 애니메이션 효과 */
+    margin-left: 50vw;
+    opacity: 0;
+    transition: all 1s;
+    transition-delay: 0.5s;
+}
+section.s1 .swiper .swiper-slide p {
+    /* width: 100%;
+    height: 30vw; */
+    font-size: 3vw;
+    line-height: 6vw;
+    margin-top: 5vw;
+    /* 애니메이션 효과 */
+    margin-left: 50vw;
+    opacity: 0;
+    transition: all 1s;
+    transition-delay: 0.7s;
+}
+section.s1 .swiper .swiper-slide a {
+    width: 27vw;
+    margin-top: 5vw;
+    background-color: #fff;
+    padding: 3vw 4vw 2vw 6vw;
+    border-radius: 30px;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: space-between;
+    /* 애니메이션 효과 */
+    margin-left: 50vw;
+    opacity: 0;
+    transition: all 1s;
+    transition-delay: 0.9s;
+}
+section.s1 .swiper .swiper-slide a span {
+    width: 4vw;
+    /* 이게 있어야 가로길이 적용됨 */
+    display: block;
+    margin-top: 1vw;
+}
+/* 글자 애니메이션 */
+section.s1 .swiper .swiper-slide-active h1{
+    margin-left:0;
+    opacity: 1;
+}
+section.s1 .swiper .swiper-slide-active p {
+    margin-left:0;
+    opacity: 1;
+}
+section.s1 .swiper .swiper-slide-active a {
+    margin-left:0;
+    opacity: 1;
+}
+/* 스와이퍼 동그라미 부분 */
+section.s1 .swiper-horizontal > .swiper-pagination-bullets {
+    bottom: 10vw;
+}
+section.s1 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 2vw;
+    width: 12px;
+    height: 12px;
+}
+section.s1 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet-active {
+    background-color: #fff;
+}
+
+/* section.s2 (탭메뉴) */
+section.s2 {
+    /* height: 330vh; */
+}
+/* 제목 */
+section.s2 h1 {
+    /* color: #8da48d; */
+    text-align: center;
+    margin-top: 15vw;
+    margin-bottom: 10vw;
+    font-size: 7vw;
+}
+/* 3개 아이콘 */
+section.s2 .tab .tab_title ul {
+    display: flex;
+    flex-flow: row nowrap;
+    /* 글자를 띄엄띄엄 분배할것이 아니라, 가득차게 분배할거니까
+    justify 안 넣어줬음 */
+}
+section.s2 .tab .tab_title ul li {
+    /* 가로로 3개 분배해주는거니까 이런 수치로 가로를 준것임 */
+    width: 33.333333333%;
+    background-color: #e5f1e5;
+    /* 글자는 가운데 정렬 */
+    text-align: center;
+    /* 크기 차지하는거 */
+    padding: 4vw;
+    /* ????margin빼고 자리를 깔끔하게 차지해라 */
+    box-sizing: border-box;
+}
+section.s2 .tab .tab_title ul li:nth-child(2) {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+section.s2 .tab .tab_title ul li a {
+    /* 자식객체가 좌우로 오길래
+    세로로 정렬할 수 있도록 이렇게 해줌 */
+    display: flex;
+    flex-flow:column nowrap;
+}
+section.s2 .tab .tab_title ul li a .tab_icon {
+    /* 부모가 33.333333333%이거를 기준으로 거기의 60%!을 가로로 준것 */
+    width: 60%;
+    height: 14vw;
+    /* 얘는 영역이라서 text-align:center 가 안먹힘 */
+    margin: 0 auto;
+    margin-bottom: 3vw;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
+}
+section.s2 .tab .tab_title ul li a .icon1 {
+    background-image: url(../img/lifestyle_2.png)
+}
+section.s2 .tab .tab_title ul li a .icon2 {
+    background-image: url(../img/run2.png);
+}
+section.s2 .tab .tab_title ul li a .icon3 {
+    background-image: url(../img/soccer2.png);
+}
+section.s2 .tab .tab_title ul li a p {
+    color: #8da48d;
+}
+section.s2 .tab .tab_title ul li.active {
+    background-color: #8da48d;
+}
+section.s2 .tab .tab_title ul li.active a .tab_icon {
+    background-position: center bottom;
+}
+section.s2 .tab .tab_title ul li.active a p {
+    color: #fff;
+}
+section.s2 .tab .tab_con {
+    position: relative;
+    /* s3랑 간격 준것 높이를 못 읽어서 여기다 높이 줌 */
+    height: 290vh;
+}
+/* 자식 두명 다 absolute */
+section.s2 .tab .tab_con > div {
+    position: absolute;
+}
+section.s2 .tab .tab_con .tab_bg {
+    width: 100%;
+    height: 50vw;
+    background-color: #8da48d;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list {
+    position: absolute;
+    padding: 10vw 8vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt {
+    color: #fff;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt .tab_txt_title {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt .tab_txt_title button {
+    background-color: transparent;
+    border: none;
+    color: #dde0e7;
+    font-size: 3.4vw;
+    /* 자식객체 세로 가운데로 정렬 */
+    display: flex;
+    align-items:center;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt .tab_txt_title button span {
+    /* 인라인+블록요소 다 가지고 있도록 */
+    display: inline-block;
+    width: 5vw;
+    margin-left: 2vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt p {
+    margin-top: 12vw;
+    font-size: 3vw;
+    line-height: 5vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt_wrap {
+    margin-top: 10vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt_wrap .tab_txt_list {
+    box-shadow: 7px 10px 5px rgba(0,0,0,0.03);
+    margin-bottom: 20vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt_wrap
+.tab_txt_list .tab_txt_des {
+    padding: 4vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt_wrap
+.tab_txt_list .tab_txt_des h2 {
+    margin-bottom: 5vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt_wrap
+.tab_txt_list .tab_txt_des h3 {
+    margin-bottom: 5vw;
+    font-size: 4vw;
+}
+section.s2 .tab .tab_con .tab_list_wrap .tab_list .tab_txt_wrap
+.tab_txt_list .tab_txt_des p {
+    font-size: 3vw;
+    line-height: 5vw;
+}
+/* section.s3 슬라이드  */
+
+/* 제목 */
+section.s3 h1 {
+    text-align:center;
+    margin-top: 15vw;
+    margin-bottom: 10vw;
+    font-size: 7vw;
+}
+section.s3 .swiper-slide {
+    background-color: #fff;
+}
+section.s3 .swiper-slide .swiper-des {
+    padding: 12vw 10vw;
+}
+section.s3 .swiper-slide .swiper-des h1 {
+    text-align: left;
+    margin: 0;
+    font-size: 6vw;
+    /* 애니 */
+    opacity: 0;
+    margin-top: 5vw;
+}
+section.s3 .swiper-slide .swiper-des .swiper-title {
+    color: #333;
+}
+section.s3 .swiper-slide .swiper-des p {
+    line-height: 5vw;
+    padding: 10vw 0;
+    /* 애니 */
+    opacity: 0;
+    margin-top: 5vw;
+}
+section.s3 .swiper-slide .swiper-des button {
+    border: 1px solid #333;
+    background-color: #fff;
+    display:flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4vw;
+    width: 100%;
+    font-size: 3.4vw;
+    font-weight: bold;
+    /* 애니 */
+    opacity: 0;
+    margin-top: 5vw;
+}
+section.s3 .swiper-slide .swiper-des button span {
+    display: block;
+    width: 5vw;
+}
+section.s3 .swiper-slide-active .swiper-des .swiper-num {
+    opacity: 1;
+    margin-top:0;
+    transition: all 0.5s;
+    transition-delay: 1s;
+}
+section.s3 .swiper-slide-active .swiper-des .swiper-title{
+    opacity: 1;
+    margin-top:0;
+    transition: all 0.5s;
+    transition-delay: 1.1s;
+}
+section.s3 .swiper-slide-active .swiper-des .swiper-txt {
+    opacity: 1;
+    margin-top:0;
+    transition: all 0.5s;
+    transition-delay: 1.2s;
+}
+section.s3 .swiper-slide-active .swiper-des .swiper-btn {
+    cursor:pointer;
+    opacity: 1;
+    margin-top:0;
+    transition: all 0.5s;
+    transition-delay: 1.3s;
+}
+section.s3 .swiper .swiper-button-next {
+    right:0;
+    top:85vw;
+    padding:8vw;
+    background-color:#fff;
+    /* top:42%; */
+}
+/* after에다가 크기를 작성해야함 */
+section.s3 .swiper .swiper-button-next:after {
+    padding: 0 3.5vw;
+    padding-right: 10vw;
+    font-size: 5vw;
+    color: #333;
+    border-left: 2px solid #ccc;
+}
+section.s3 .swiper .swiper-button-prev {
+    left: auto;
+    right:16vw;
+    top:85vw;
+    padding:8vw;
+    background-color:#fff;
+    /* top:42%; */
+}
+/* after에다가 크기를 작성해야함 */
+section.s3 .swiper .swiper-button-prev:after {
+    padding: 0 3.5vw;
+    padding-left: 10vw;
+    font-size: 5vw;
+    color: #333;
+}
+/* 박스 투명해지는거 막는 것 */
+section.s3 .swiper .swiper-button-next.swiper-button-disabled,
+section.s3 .swiper .swiper-button-prev.swiper-button-disabled {
+    opacity: 1;
+}
+/* 사진이 끝나면 화살표 색 변함 */
+section.s3 .swiper .swiper-button-next.swiper-button-disabled:after,
+section.s3 .swiper .swiper-button-prev.swiper-button-disabled:after {
+    color:#ccc;
+}
+
+/* section.s4 */
+section.s4 {
+    background-image: url(../img/main4_bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* 이미지가 슬라이드 밑에 바싹 붙어있어서 이걸 넣음 */
+    padding-bottom: 20vw;
+}
+section.s4 h1 {
+    text-align: center;
+    margin-top: 15vw;
+    margin-bottom: 10vw;
+    font-size: 7vw;
+    color: #fff;
+}
+section.s4 p {
+    color: #fff;
+    text-align: center;
+    line-height: 5vw;
+}
+section.s4 .swiper {
+    margin-top: 10vw;
+    /* 원래 스와이퍼라는 곳에 있음(이건 개발자 도구에서 볼 수 있음) */
+    overflow: visible; /* hidden 안보임 속성을 -> visible 보임 속성으로 변경 */
+}
+section.s4 .swiper .swiper-slide {
+    cursor: pointer;
+    /* 너비크기는 js에다가 줬음(간격으로) */
+    height: 98vw;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    padding: 6vw;
+    padding-top: 30vw;
+}
+section.s4 .swiper .online1 {
+    background-image: url(../img/main4-1.png);
+}
+section.s4 .swiper .online2 {
+    background-image: url(../img/main4-2.png);
+}
+section.s4 .swiper .online3 {
+    background-image: url(../img/main4-3.png);
+}
+section.s4 .swiper .swiper-slide h1 {
+    font-size: 5vw;
+    margin-bottom: 5vw;
+    text-align: left;
+}
+section.s4 .swiper .swiper-slide hr {
+    /* 기본으로 그림자 같은게 있길래 이걸 해줌 */
+    border:0;
+    height: 1px;
+    background-color: #fff;
+    margin-bottom: 5vw;
+}
+section.s4 .swiper .swiper-slide p {
+    text-align: left;
+    font-size: 3vw;
+    line-height: 6vw;
+}
+section.s4 .swiper .swiper-slide h2 {
+    text-align: left;
+    margin-top: 3vw;
+    font-size: 3vw;
+    color: #fff;
+    font-weight: normal;
+}
+section.s4 .swiper-horizontal > .swiper-pagination-bullets {
+    bottom: -40px;
+}
+section.s4 .swiper-horizontal > .swiper-pagination-bullets 
+.swiper-pagination-bullet {
+    margin: 0 2vw;
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+}
+section.s4 .swiper-horizontal > .swiper-pagination-bullets 
+.swiper-pagination-bullet-active {
+    background-color: #fff;
+}
+
+/* section.s5 */
+/* 제목 */
+section.s5 h1 {
+    text-align: center;
+    margin-top: 15vw;
+    margin-bottom: 10vw;
+    font-size: 7vw;
+}
+section.s5 .news {
+    width: 90%;
+    margin: 0 auto;
+    /* 위에 div, header, section, footer { width:100%; float:left; }함
+     그런데 float:left가 있으면 margin:0 auto; 가 적용이 안됨
+     그래서 float:left속성을 없애줌 */
+    float: none;
+}
+section.s5 .news .news_list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    border-top: 1px solid #d0d0d0;
+    padding: 5vw 0;
+}
+section.s5 .news .news_list .news_des {
+    margin-top: 3vw;
+}
+section.s5 .news .news_list:last-child {
+    border-bottom: 1px solid #d0d0d0;
+}
+section.s5 .news .news_list div {
+    width: 46%;
+}
+section.s5 .news .news_list div p {
+    font-size: 3vw; 
+    font-weight: bold;
+    margin-top: 1vw;
+    margin-bottom: 1.4vw;
+}
+section.s5 .news .news_list div h3 {
+    font-size:2vw;
+    font-weight: normal;
+}
+section.s5 .news .news_list div h4 {
+    margin: 4vw 0;
+    line-height: 5vw;
+}
+section.s5 .news .news_list div a {
+    width: 20vw;
+    margin-top: 5vw;
+    background-color: #fff;
+    padding: 1.3vw 2vw 1.6vw 4vw;
+    border-radius: 30px;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: space-between;
+    border:solid 1px #999;
+    white-space: nowrap;
+}
+section.s5 .news .news_list div a span {
+    width: 2vw;
+    height: 1.6vw;
+    /* 이게 있어야 가로길이 적용됨 */
+    display: block;
+    margin-top: 1.2vw;
+
+    background-image: url(../img/right_arrow.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+section.s5 .news .news_list div a:hover {
+    background-color: #a9c2a9;
+    color: #fff;
+    border: solid 1px #a9c2a9;
+    
+}
+section.s5 .news .news_list div a:hover span {
+    background-image: url(../img/right_arrow_white.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} 
+/* footer */
+
+footer {
+    background-color:#8da48d;
+    margin-top: 15vw;
+}
+footer .inner {
+    width: 90%;
+    float: none;
+    margin: 0 auto;
+    padding: 10vw 0;
+}
+footer .inner .info {
+    display:flex;
+    flex-flow: row nowrap;
+}
+footer .inner .info ul li {
+    margin-right: 5vw;
+    padding-bottom: 7vw;
+}
+footer .inner .info ul li a {
+    color: #fff;
+    font-size: 3.2vw;
+}
+/* footer .inner .info ul li:nth-child(2) a {
+    color: #000000;
+    font-weight: bold;
+} */
+footer .inner .family {
+    display:flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
+
+    padding-bottom: 8vw;
+}
+footer .inner .family select {
+    background-color: #fff;
+    padding: 4vw;
+    width: 84%;
+    font-size: 3.2vw;
+    color: #333;
+    font-weight: bold;
+    border:none;
+    /* select태그의 오른쪽 화살표 숨김 */
+    appearance: none;
+
+    background-image: url(../img/right_arrow.png);
+    background-repeat: no-repeat;
+    background-position: right 20px center; /*오른쪽 안쪽으로 10만큼 들어와라*/
+}
+footer .inner .family a {
+    width: 6%;
+    padding: 4vw;
+    font-size: 3vw;
+    color: #333;
+    background-color: #fff;
+    white-space: nowrap;
+}
+footer .inner .addr {
+    border-top: 1px solid #8b8b8b;
+    padding: 8vw 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+footer .inner .addr .footer_logo {
+    width:20%;
+}
+footer .inner .addr address {
+    font-size: 2vw;
+    line-height: 5vw;
+    color: #fff;
+    font-style:normal;
+}
+.top {
+    width: 65px;
+    height:65px;
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    border-radius: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #363636;
+    box-shadow: 1px 1px 2px #111;
+    z-index:1000;
+    /* 서서히 나오게 하는거 */
+    transform:scale(0,0);
+    transition:all 0.5s;
+}
+/* 서서히 나오게 하는거 */
+.top.active {
+    transform: scale(1,1);
+}
